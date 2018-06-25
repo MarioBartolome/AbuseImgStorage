@@ -102,3 +102,22 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+*.aux
+
+*.bbl
+
+*.blg
+*.out
+*.gz
+*.tex
+*.jpeg
+*.png
+*.mp3
+*.db
+*.plist
+*.icns
+imtest
+setup.py
+
+\.idea/
