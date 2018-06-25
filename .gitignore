@@ -117,7 +117,6 @@ venv.bak/
 *.db
 *.plist
 *.icns
-imtest
 setup.py
 
 \.idea/
