@@ -1,16 +1,17 @@
-'''
+"""
 Author: Mario Bartolome
 Date: 16/04/2018
 
 This program will fragment an input file to smaller pieces that could be uploaded to any free image storage service
 without really taking any space on your account, as the service will recognize those as pictures.
-'''
+"""
 
 import random
 import hashlib
 import pickle
 from collections import OrderedDict
-import sys, os
+import sys
+import os
 
 
 HEADERS = [b'\xff\xd8\xff\xe0\x00\x10\x4a\x46\x49\x46\x00', b'\xff\xd8\xff\xe1\x00\x10\x45\x78\x69\x66\x00']
@@ -44,7 +45,6 @@ def fragment(file):
 				w.write(EOI)
 				w.write(chunk)
 
-
 			# Updates: fragment number and the full digest for reconstruction purposes
 			with open(file_path + '/' + filename, 'rb') as w:
 				m.update(w.read())
@@ -66,7 +66,7 @@ def fragment(file):
 def reconstruct(db):
 	print('[i] Reading reconstruction database...')
 	with open(db, 'rb') as dbf:
-		reconstruction_db = pickle.loads(removeHeadEOI(dbf))
+		reconstruction_db = pickle.loads(remove_head_EOI(dbf))
 		ext = reconstruction_db.pop('ext')
 		print('[*] Database ready')
 		db_path = os.path.dirname(db)
@@ -84,24 +84,28 @@ def reconstruct(db):
 							sys.exit(1)
 
 						# Reconstruct the file
-						f.seek(0,0)
-						w.write(removeHeadEOI(f))
+						f.seek(0, 0)
+						w.write(remove_head_EOI(f))
 				except FileNotFoundError:
 					print("Hummm... I could not find the following file: " + db_path + '/' + file_info[0])
 					return False
 
 			print('[*] Files joined!')
-			print('[*] Reconstructed file with name: recovered - ' + filename + ext)
+			print('[*] Reconstructed file with name: Reconstructed - ' + filename + ext)
 			return True
 
 
-def removeHeadEOI(f):
+def remove_head_EOI(f):
 	buffer = f.read()
-	buffer = buffer[HEADER_SIZE + len(open(os.path.join(os.path.dirname(__file__), PREVIEW_HEX,), 'rb').read()) + EOI_SIZE:]
+	buffer = buffer[
+	         HEADER_SIZE + len(
+		         open(os.path.join(os.path.dirname(__file__), PREVIEW_HEX,), 'rb').read()
+	         ) + EOI_SIZE:
+	         ]
 	return buffer
 
 
-def checkIntegrity(original, reconstructed):
+def check_integrity(original, reconstructed):
 	print('[i] Checking files integrity...')
 
 	with open(original, 'rb') as o:
@@ -111,7 +115,7 @@ def checkIntegrity(original, reconstructed):
 
 			m_o.update(o.read())
 			m_r.update(r.read())
-			if (m_o.digest() == m_r.digest()):
+			if m_o.digest() == m_r.digest():
 				print('[*] Both files are equal!')
 			else:
 				print('[!] ERROR: The files differ!')
@@ -121,12 +125,12 @@ if __name__ == '__main__':
 	args_no = len(sys.argv)
 	if args_no == 2:
 		if sys.argv[1].endswith('.db'):
-			if(reconstruct(sys.argv[1])):
+			if reconstruct(sys.argv[1]):
 				print('Reconstruction finished successfully')
 		else:
 			fragment(sys.argv[1])
 			print('Fragmentation finished successfully')
 	elif args_no == 3:
-		checkIntegrity(sys.argv[1], sys.argv[2])
+		check_integrity(sys.argv[1], sys.argv[2])
 	else:
 		print('[!] USAGE: python3 Fragmentor.py FileToFragment/DBToReconstruct')
