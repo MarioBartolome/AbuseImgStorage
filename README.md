@@ -15,10 +15,10 @@ chunks.
 
 
 - Maybe you want a different max or min size for the chunks. 
-    - You can alter the min size limit with the modifier `-m` or `-min-size` followed by the size in MB.
+    - You can alter the min size limit with the modifier `-m` or `--min-size` followed by the size in MB.
     
     `user@computer ~/AbuseImgStorage/FileComposer> python3 Fragmentor.py chunk PATH_TO_FILE -m SIZE_IN_MB`
-    - You can alter the max size limit with the modifier `-M` or `-max-size` followed by the size in MB.
+    - You can alter the max size limit with the modifier `-M` or `--max-size` followed by the size in MB.
     
     `user@computer ~/AbuseImgStorage/FileComposer> python3 Fragmentor.py chunk PATH_TO_FILE -M SIZE_IN_MB`
 
