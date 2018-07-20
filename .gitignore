@@ -112,7 +112,6 @@ venv.bak/
 *.gz
 *.tex
 *.jpeg
-*.png
 *.mp3
 *.db
 *.plist
