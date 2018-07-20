@@ -1,7 +1,7 @@
 # AbuseImgStorage
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/23175380/41865407-3f1cf97c-78ad-11e8-852f-fca05b59bbea.jpg">
+  <img src="https://user-images.githubusercontent.com/23175380/42990721-ce957cc8-8c03-11e8-99b2-ac9a62737d47.png">
 </p>
 
 
