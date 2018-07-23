@@ -5,6 +5,11 @@
 </p>
 
 
+### A quick video-tutorial
+
+  [![Watch it on https://www.youtube.com/watch?v=dCPOZLrOG8o](https://img.youtube.com/vi/dCPOZLrOG8o/0.jpg)](https://www.youtube.com/watch?v=dCPOZLrOG8o)
+
+
 ### To fragment a file into "images" ;)
 
 `user@computer ~/AbuseImgStorage/FileComposer> python3 Fragmentor.py chunk PATH_TO_FILE`
